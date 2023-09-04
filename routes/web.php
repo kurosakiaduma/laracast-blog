@@ -18,17 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function($slug) {
-    //Introduce a variable to store the path to the post
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    //Store the post in the cache for 5 seconds
-    $post = cache()->remember("posts.{$slug}", 5, function () use ($path) {
-        var_dump('file_get_contents');
-        return file_get_contents($path);
-    });    
-
-    //Check whether the file exists
-    if (! file_exists($path)){
+    //Introduce a variable to store the path to the post and check if it exists
+    if (! file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")){
         /*
         
         //Die and dump for quick debugging. Kills the execution and prints a logging statement
@@ -46,7 +37,17 @@ Route::get('posts/{post}', function($slug) {
 
     }
 
-    $post = file_get_contents($path);
+
+    /*
+    $post = cache()->remember("posts.{$slug}", 5, function () use ($path) {
+        var_dump('file_get_contents');
+        return file_get_contents($path);
+    });    
+    */
+
+    //Store the post in the cache for a day
+    $post = cache()->remember("posts.{$slug}", now()->addDay(), fn() => file_get_contents($path));
+
     return view('post',[
         'post' => $post
     ]);
