@@ -17,14 +17,19 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get('post/{post}', function($slug) {
+Route::get('posts/{post}', function($slug) {
     //Introduce a variable to store the path to the post
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    
+    
+
     //Check whether the file exists
     if (! file_exists($path)){
         /*
+        
         //Die and dump for quick debugging. Kills the execution and prints a logging statement
         dd("File does not exist");
+        
         //Die, dump and debug
         ddd("File does not exist");
         */
@@ -41,4 +46,4 @@ Route::get('post/{post}', function($slug) {
     return view('post',[
         'post' => $post
     ]);
-});
+})->where('post', '[A-z_\-]+');
