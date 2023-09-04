@@ -4,6 +4,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 class Post
 {
+    /**
+     * returns each individual post page lest throws an exception if the slug URI is not located
+     * @param mixed $slug
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return mixed
+     */
     public static function find($slug)
     {
         //custom find method for the Posts class
@@ -16,10 +22,10 @@ class Post
             ddd("File does not exist");
         */
 
-            //you can also automatically redirect to another page if the link is broken 
+            //you can also automatically redirect to another page if the link is broken
             // return redirect('/');
-        
-            //abort functionality in Laravel when the post slug is not foun 
+
+            //abort functionality in Laravel when the post slug is not foun
             // abort(404);
 
             //throw an exception with a helper method representing a 404 model
@@ -29,14 +35,17 @@ class Post
         $post = cache()-> remember("posts.{$slug}", 5, function () use ($path) {
         var_dump('file_get_contents');
         return file_get_contents($path);
-        });    
+        });
         */
 
         //Store the post in the cache for a day
         $post = cache()->remember("posts.{$slug}", now()->addDay(), fn() => file_get_contents($path));
         return $post;
     }
-
+    /**
+     * Returns an array of the contents of each post from the resources folder
+     * @return array
+     */
     public static function all(){
         //store all the files in an array
         $files = File::files(resource_path("posts/"));
@@ -45,7 +54,7 @@ class Post
         return array_map(function ($file) {
             return $file -> getContents();
         }, $files);
-        
+
         //arrow function equivalent
         //array_map(fn($file) => $file->getContents, $files)
     }

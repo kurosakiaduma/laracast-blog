@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('ps/{post}', function($slug) {    
+Route::get('ps/{post}', function($slug) {
     //Introduce a variable to store the path to the post and check if it exists
 })->where('post', '[A-z_\-]+');
 
