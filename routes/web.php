@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get('post', function() {
+Route::get('post/{post}', function($slug) {
+    //Introduce a variable to hold the contents of the file
+    $post = file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
     return view('post',[
-        'post' => '<h1>Hello World</h1>'
+        'post' => $post
     ]);
 });
