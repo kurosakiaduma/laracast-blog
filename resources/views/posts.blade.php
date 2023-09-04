@@ -9,9 +9,11 @@
 
     <?php foreach ($posts as $post) : ?>
         <article>
-            <h1><?= $post -> title ?></h1>
+            <a href="/posts/<?=$post -> slug ?>">
+                <h1><?= $post -> title; ?></h1>
+            </a>
             <div>
-                <?= $post->body ?>
+                <?= $post->excerpt; ?>
             </div>
         </article>
 

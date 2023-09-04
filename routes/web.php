@@ -29,6 +29,7 @@ Route::get('/', function () {
             $document->date_published,
             $document->author,
             $document->body(),
+            $document->slug,
         );
     };
 

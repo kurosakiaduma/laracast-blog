@@ -17,13 +17,16 @@ class Post
 
     public $body;
 
-    public function __construct($title, $excerpt, $date_published, $author, $body)
+    public $slug;
+
+    public function __construct($title, $excerpt, $date_published, $author, $body, $slug)
     {
         $this->title = $title;
         $this->excerpt = $excerpt;
         $this->date_published = $date_published;
         $this->author = $author;
         $this->body = $body;
+        $this->slug = $slug;
     }
 
 
