@@ -18,8 +18,21 @@ Route::get('/', function () {
 });
 
 Route::get('post/{post}', function($slug) {
-    //Introduce a variable to hold the contents of the file
-    $post = file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
+    //Introduce a variable to store the path to the post
+    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    //Check whether the file exists
+    if (! file_exists($path)){
+        /*
+        //Die and dump for quick debugging. Kills the execution and prints a logging statement
+        dd("File does not exist");
+        //Die, dump and debug
+        ddd("File does not exist");
+        */
+        //abort functionality in Laravel
+        abort(404);
+    };
+
+    $post = file_get_contents($path);
     return view('post',[
         'post' => $post
     ]);
