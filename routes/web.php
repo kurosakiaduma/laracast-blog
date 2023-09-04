@@ -15,8 +15,24 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
+    //retreive all the files from the resources posts folder
+    $files = File::files(resource_path('posts'));
+    //create an array
+    $documents = [];
+    //loop through each file in the files array appending each files content to the document array
+    foreach ($files as $file) {
+        $documents[] = YamlFrontMatter::parseFile($file);
+    };
+
+    ddd($documents);
+
+
+
+    //Use Spatie's YamlFrontMatter to query metadata from each post
+    //$document = YamlFrontMatter::parseFile(resource_path('posts\my-fourth-post.html'));
+
     //Return all the posts from the resources/posts directory
-    return view('posts',['posts' => Post::all()]);
+    //return view('posts',['posts' => Post::all()]);
 });
 
 
