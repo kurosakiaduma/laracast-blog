@@ -20,8 +20,12 @@ Route::get('/', function () {
 Route::get('posts/{post}', function($slug) {
     //Introduce a variable to store the path to the post
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
-    
-    
+
+    //Store the post in the cache for 5 seconds
+    $post = cache()->remember("posts.{$slug}", 5, function () use ($path) {
+        var_dump('file_get_contents');
+        return file_get_contents($path);
+    });    
 
     //Check whether the file exists
     if (! file_exists($path)){
