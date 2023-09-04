@@ -15,11 +15,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-    //retreive all the files from the resources posts folder
-    $files = File::files(resource_path('posts'));
-
-    //Laravel's Collection approach
-    $posts = collect($files)
+    //retreive all the files from the resources posts folder using Laravel's Collection approach
+    $posts = collect(File::files(resource_path('posts')))
         ->map(function ($file) {
             $document = YamlFrontMatter::parseFile($file);
 
