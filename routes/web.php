@@ -32,15 +32,13 @@ Route::get('/', function () {
         );
     };
 
-    ddd($posts);
-
 
 
     //Use Spatie's YamlFrontMatter to query metadata from each post
     //$document = YamlFrontMatter::parseFile(resource_path('posts\my-fourth-post.html'));
 
-    //Return all the posts from the resources/posts directory
-    //return view('posts',['posts' => Post::all()]);
+    //Return all the posts from posts array
+    return view('posts',['posts' => $posts]);
 });
 
 
