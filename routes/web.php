@@ -17,13 +17,14 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', function () {
     //retreive all the files from the resources posts folder
     $files = File::files(resource_path('posts'));
-    //create an array
-    $posts = [];
-    //loop through each file in the files array appending each files content to the document array
-    foreach ($files as $file) {
-        $document = YamlFrontMatter::parseFile($file);
 
-        $posts[] = new Post(
+    //Laravel's Collection approach
+    collect($files) ->
+
+    //ALTERNATE LOOP FUNCTION
+    $posts  = array_map(function($file){
+        $document = YamlFrontMatter::parseFile($file);
+        return new Post(
             $document->title,
             $document->excerpt,
             $document->date_published,
@@ -31,8 +32,26 @@ Route::get('/', function () {
             $document->body(),
             $document->slug,
         );
-    };
+        }, $files);
+    //create an array
+    //$posts = [];
+    //loop through each file in the files array appending each files content to the document array
+    /*
+    NOTE: Should you find yourself looping over an iterable only to build a new iterable,
+    Collections is probably your best bet in optimizing your code
+    */
+    //foreach ($files as $file) {
+    //    $document = YamlFrontMatter::parseFile($file);
 
+    //    $posts[] = new Post(
+    //    $document->title,
+    //    $document->excerpt,
+    //    $document->date_published,
+    //    $document->author,
+    //    $document->body(),
+    //    $document->slug,
+    //    );
+    //};
 
 
     //Use Spatie's YamlFrontMatter to query metadata from each post
