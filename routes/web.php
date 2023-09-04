@@ -15,8 +15,7 @@ use App\Models\Post;
 
 Route::get('/', function () {
     //Return all the posts from the resources/posts directory
-    $posts = Post::all();
-    return view('posts',['posts' => $posts]);
+    return view('posts',['posts' => Post::all()]);
 });
 
 

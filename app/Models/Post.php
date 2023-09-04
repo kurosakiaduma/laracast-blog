@@ -45,6 +45,9 @@ class Post
         return array_map(function ($file) {
             return $file -> getContents();
         }, $files);
+        
+        //arrow function equivalent
+        //array_map(fn($file) => $file->getContents, $files)
     }
 }
 ?>
