@@ -19,10 +19,22 @@ Route::get('/', function () {
     $files = File::files(resource_path('posts'));
 
     //Laravel's Collection approach
-    collect($files) ->
+    $posts = collect($files)
+        ->map(function ($file) {
+            $document = YamlFrontMatter::parseFile($file);
 
+            return new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date_published,
+                $document->author,
+                $document->body(),
+                $document->slug,
+            );
+        });
+/*
     //ALTERNATE LOOP FUNCTION
-    $posts  = array_map(function($file){
+    // $posts  = array_map(function($file){
         $document = YamlFrontMatter::parseFile($file);
         return new Post(
             $document->title,
@@ -33,13 +45,17 @@ Route::get('/', function () {
             $document->slug,
         );
         }, $files);
+*/
     //create an array
     //$posts = [];
+
     //loop through each file in the files array appending each files content to the document array
+
     /*
     NOTE: Should you find yourself looping over an iterable only to build a new iterable,
     Collections is probably your best bet in optimizing your code
     */
+
     //foreach ($files as $file) {
     //    $document = YamlFrontMatter::parseFile($file);
 
