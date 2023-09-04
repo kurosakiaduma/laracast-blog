@@ -28,9 +28,14 @@ Route::get('post/{post}', function($slug) {
         //Die, dump and debug
         ddd("File does not exist");
         */
+
+        //you can also automatically redirect to another page if the link is broken 
+        // return redirect('/');
+        
         //abort functionality in Laravel
         abort(404);
-    };
+
+    }
 
     $post = file_get_contents($path);
     return view('post',[
