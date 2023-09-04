@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,41 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('posts');
+    //Return all the posts from the resources/posts directory
+    $posts = Post::all();
+    return view('posts',['posts' => $posts]);
 });
 
-Route::get('posts/{post}', function($slug) {
+
+Route::get('ps/{post}', function($slug) {    
     //Introduce a variable to store the path to the post and check if it exists
-    if (! file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")){
-        /*
-        
-        //Die and dump for quick debugging. Kills the execution and prints a logging statement
-        dd("File does not exist");
-        
-        //Die, dump and debug
-        ddd("File does not exist");
-        */
-
-        //you can also automatically redirect to another page if the link is broken 
-        // return redirect('/');
-        
-        //abort functionality in Laravel
-        abort(404);
-
-    }
-
-
-    /*
-    $post = cache()->remember("posts.{$slug}", 5, function () use ($path) {
-        var_dump('file_get_contents');
-        return file_get_contents($path);
-    });    
-    */
-
-    //Store the post in the cache for a day
-    $post = cache()->remember("posts.{$slug}", now()->addDay(), fn() => file_get_contents($path));
-
-    return view('post',[
-        'post' => $post
-    ]);
 })->where('post', '[A-z_\-]+');
+
+/*
+Alternative route function to find posts by their slug names
+*/
+Route::get('posts/{post}', function ($slug) {
+    //Find a post by its slug and pass it to a view called "post"
+    return view('post', [
+        'post' => Post::find($slug)
+    ]);
+
+});
