@@ -18,13 +18,21 @@ Route::get('/', function () {
     //retreive all the files from the resources posts folder
     $files = File::files(resource_path('posts'));
     //create an array
-    $documents = [];
+    $posts = [];
     //loop through each file in the files array appending each files content to the document array
     foreach ($files as $file) {
-        $documents[] = YamlFrontMatter::parseFile($file);
+        $document = YamlFrontMatter::parseFile($file);
+
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->date_published,
+            $document->author,
+            $document->body(),
+        );
     };
 
-    ddd($documents);
+    ddd($posts);
 
 
 

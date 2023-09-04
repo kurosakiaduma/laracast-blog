@@ -2,8 +2,33 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+/**
+ * Post model instantiated with title, excerpt, body, date_published and author
+ */
 class Post
 {
+    public $title;
+
+    public $excerpt;
+
+    public $date_published;
+
+    public $author;
+
+    public $body;
+
+    public function __construct($title, $excerpt, $date_published, $author, $body)
+    {
+        $this->title = $title;
+        $this->excerpt = $excerpt;
+        $this->date_published = $date_published;
+        $this->author = $author;
+        $this->body = $body;
+    }
+
+
+
+
     /**
      * returns each individual post page lest throws an exception if the slug URI is not located
      * @param mixed $slug
