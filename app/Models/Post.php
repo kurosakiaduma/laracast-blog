@@ -14,4 +14,5 @@ class Post extends Model
 
     /* Protected fields from mass assignment to avoid vulnerabilities*/
     protected $guarded = ['id'];
+
 }

@@ -71,7 +71,7 @@ Route::get('ps/{post}', function($slug) {
 /*
 Alternative route function to find posts by their ids from the Post model
 */
-Route::get('posts/{post}', function (Post $post) {
+Route::get('posts/{post:slug}', function (Post $post) {
     //Find a post by its id and pass it to a view called "post"
     //ddd($post);
     return view('post', [
