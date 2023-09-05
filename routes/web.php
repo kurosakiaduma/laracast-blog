@@ -15,21 +15,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-    //retreive all the files from the resources posts folder using Laravel's Collection approach
-    $posts = collect(File::files(resource_path('posts')))
-        ->map(function ($file) {
-            $document = YamlFrontMatter::parseFile($file);
+    //retrieve all the files from the resources posts folder using Laravel's Collection approach
 
-            return new Post(
-                $document->title,
-                $document->excerpt,
-                $document->date_published,
-                $document->author,
-                $document->body(),
-                $document->slug,
-            );
-        });
-/*
+    /*
     //ALTERNATE LOOP FUNCTION
     // $posts  = array_map(function($file){
         $document = YamlFrontMatter::parseFile($file);
@@ -42,7 +30,8 @@ Route::get('/', function () {
             $document->slug,
         );
         }, $files);
-*/
+    */
+
     //create an array
     //$posts = [];
 
@@ -71,8 +60,8 @@ Route::get('/', function () {
     //$document = YamlFrontMatter::parseFile(resource_path('posts\my-fourth-post.html'));
 
     //Return all the posts from posts array
-    return view('posts',['posts' => $posts]);
-});
+    return view('posts',['posts' => Post::all()]);
+    });
 
 
 Route::get('ps/{post}', function($slug) {
@@ -85,7 +74,7 @@ Alternative route function to find posts by their slug names
 Route::get('posts/{post}', function ($slug) {
     //Find a post by its slug and pass it to a view called "post"
     return view('post', [
-        'post' => Post::find($slug)
+        'post' => Post::findExact($slug)
     ]);
 
 });

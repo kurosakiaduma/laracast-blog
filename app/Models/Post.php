@@ -2,6 +2,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 /**
  * Post model instantiated with title, excerpt, body, date_published and author
  */
@@ -71,20 +72,34 @@ class Post
         return $post;
     }
     /**
-     * Returns an array of the contents of each post from the resources folder
-     * @return array
+     *  Returns an array of the contents of each post from the resources folder
+     * @return \Illuminate\Support\Collection
      */
     public static function all(){
-        //store all the files in an array
-        $files = File::files(resource_path("posts/"));
+        return collect(File::files(resource_path('posts')))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn($document) => new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date_published,
+                $document->author,
+                $document->body(),
+                $document->slug,
+            )
+            )
+            ->sortBy('date_published');
+                //arrow function equivalent
+                //array_map(fn($file) => $file->getContents, $files)
+                }
 
-        //use array_map to loop over array and pass contents to the callback
-        return array_map(function ($file) {
-            return $file -> getContents();
-        }, $files);
-
-        //arrow function equivalent
-        //array_map(fn($file) => $file->getContents, $files)
+    /**
+     * Of all the blog posts find the one with a slug that matches the one that was requested.
+     * This is an alternative to the find method that I posted earlier.
+     * @param mixed $slug
+     * @return TValue|null
+     */
+    public static function findExact($slug){
+        return static::all()->firstWhere('slug', $slug);
     }
 }
 ?>
