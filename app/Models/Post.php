@@ -3,6 +3,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
+
+use function PHPUnit\Framework\throwException;
+
 /**
  * Post model instantiated with title, excerpt, body, date_published and author
  */
@@ -102,7 +105,12 @@ class Post
      * @return TValue|null
      */
     public static function findExact($slug){
-        return static::all()->firstWhere('slug', $slug);
+        $post = static::all()->firstWhere('slug', $slug);
+        if (! $post){
+            throw new ModelNotFoundException();
+        }
+        ;
+        return $post;
     }
 }
 ?>
