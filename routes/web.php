@@ -61,8 +61,10 @@ Route::get('/', function () {
     //$document = YamlFrontMatter::parseFile(resource_path('posts\my-fourth-post.html'));
 
     //Return all the posts from posts array
-    return view('posts',['posts' => Post::all()]);
-    });
+    return view('posts',[
+        'posts' => Post::with('category')->get()
+    ]);
+});
 
 
 Route::get('ps/{post}', function($slug) {
