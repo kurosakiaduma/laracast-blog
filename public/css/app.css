@@ -10,6 +10,10 @@ p{
     line-height: 1.5;
 }
 
+.odds{
+    background-color: bisque;
+}
+
 article + article{
     margin-top: 3rem;
     padding-top: 3rem;

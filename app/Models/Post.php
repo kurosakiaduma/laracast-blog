@@ -72,11 +72,11 @@ class Post
         return $post;
     }
     /**
-     *  Returns an array of the contents of each post from the resources folder
-     * @return \Illuminate\Support\Collection
+     * Returns a cached version of the Posts collection that is stored for around 4 minutes
+     * @return mixed
      */
     public static function all(){
-        return cache()->rememberForever('posts.all', function () {
+        return cache()->remember('posts.all', 240, function () {
              return collect(File::files(resource_path('posts')))
             ->map(fn($file) => YamlFrontMatter::parseFile($file))
             ->map(fn($document) => new Post(
@@ -95,6 +95,7 @@ class Post
         }
 
     /**
+     *
      * Of all the blog posts find the one with a slug that matches the one that was requested.
      * This is an alternative to the find method that I posted earlier.
      * @param mixed $slug
