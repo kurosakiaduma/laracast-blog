@@ -5,5 +5,5 @@
     <script src="/js/app.js" type="text/javascript"></script>
 </head>
 <body>
-    @yield('content')
+    {{ $content }}
 </body>

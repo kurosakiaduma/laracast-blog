@@ -1,6 +1,5 @@
-@extends('layout')
-
-@section('content')
+<x-layout>
+    <x-slot name="content">
     @foreach ($posts as $post)
         <article class="{{$loop->even ? 'odds':''}}">
             <a href="/posts/{{ $post->slug }}">
@@ -11,4 +10,5 @@
             </div>
         </article>
     @endforeach
-@endsection
+    </x-slot>
+</x-layout>
