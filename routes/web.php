@@ -69,12 +69,12 @@ Route::get('ps/{post}', function($slug) {
 })->where('post', '[A-z_\-]+');
 
 /*
-Alternative route function to find posts by their slug names
+Alternative route function to find posts by their ids from the Post model
 */
-Route::get('posts/{post}', function ($slug) {
-    //Find a post by its slug and pass it to a view called "post"
+Route::get('posts/{post}', function ($id) {
+    //Find a post by its id and pass it to a view called "post"
+    // ddd($id);
     return view('post', [
-        'post' => Post::findExact($slug)
+        'post' => Post::findOrFail($id)
     ]);
-
 });
