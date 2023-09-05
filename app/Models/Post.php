@@ -87,10 +87,10 @@ class Post
                 $document->slug,
             )
             )
-            ->sortBy('date_published');
-                //arrow function equivalent
-                //array_map(fn($file) => $file->getContents, $files)
-                }
+            ->sortByDesc('date_published');
+            //arrow function equivalent
+            //array_map(fn($file) => $file->getContents, $files)
+            }
 
     /**
      * Of all the blog posts find the one with a slug that matches the one that was requested.
