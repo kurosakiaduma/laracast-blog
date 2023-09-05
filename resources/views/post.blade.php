@@ -1,8 +1,8 @@
 <x-layout>
     <x-slot name="content">
-        <article>
+        <span>
             <h1 class='text-center'>{{ $post->title }}</h1>
-            <h4><strong>Category: </strong>{{ $post->category->name }}</h4>
+            <span><strong>Category: </strong><a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a></span>
             <h4><strong>Author: </strong>{{ $post->author }}</h4>
             <h4><strong>Date Published: </strong>{{ $post->date_published }}</h4>
             <div> {!! $post->body !!}</div>

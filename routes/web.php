@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 /*
 |--------------------------------------------------------------------------
@@ -69,12 +70,22 @@ Route::get('ps/{post}', function($slug) {
 })->where('post', '[A-z_\-]+');
 
 /*
-Alternative route function to find posts by their ids from the Post model
+Alternative route function to find posts by their slugs from the Post model
 */
 Route::get('posts/{post:slug}', function (Post $post) {
     //Find a post by its id and pass it to a view called "post"
     //ddd($post);
     return view('post', [
         'post' => $post
+    ]);
+});
+
+/*
+Route to retrieve all posts under similar categories
+*/
+Route::get('categories/{category:slug}', function (Category $category) {
+    //Find a category by its slug and retrieve all of its posts
+    return view('posts', [
+        'posts' => $category->posts
     ]);
 });
