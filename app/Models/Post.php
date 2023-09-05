@@ -76,7 +76,8 @@ class Post
      * @return \Illuminate\Support\Collection
      */
     public static function all(){
-        return collect(File::files(resource_path('posts')))
+        return cache()->rememberForever('posts.all', function () {
+             return collect(File::files(resource_path('posts')))
             ->map(fn($file) => YamlFrontMatter::parseFile($file))
             ->map(fn($document) => new Post(
                 $document->title,
@@ -88,9 +89,10 @@ class Post
             )
             )
             ->sortByDesc('date_published');
-            //arrow function equivalent
-            //array_map(fn($file) => $file->getContents, $files)
-            }
+        });
+        //arrow function equivalent
+        //array_map(fn($file) => $file->getContents, $files)
+        }
 
     /**
      * Of all the blog posts find the one with a slug that matches the one that was requested.
