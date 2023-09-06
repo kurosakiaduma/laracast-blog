@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
 
     /*Mass assignment fields*/
-    protected $fillable = ['title', 'excerpt', 'body', 'slug', 'author', 'category_id'];
+    protected $fillable = ['title', 'excerpt', 'body', 'slug', 'category_id'];
 
     /* Protected fields from mass assignment to avoid vulnerabilities*/
     protected $guarded = ['id'];
@@ -23,7 +23,7 @@ class Post extends Model
 
     }
 
-    public function user():
+    public function user()
     {
         #Setting up an Eloquent relationship with the user and posts
         return $this->belongsTo(User::class);
