@@ -23,9 +23,9 @@ class Post extends Model
 
     }
 
-    public function user()
+    public function author()
     {
-        #Setting up an Eloquent relationship with the user and posts
+        #Setting up an Eloquent relationship with the author and posts
         return $this->belongsTo(User::class);
 
     }

@@ -20,7 +20,7 @@ class PostFactory extends Factory
     {
         return [
             //Faker methods for each column in the Post table
-            'user_id'=>User::factory(),
+            'author_id'=>User::factory(),
             'category_id'=>Category::factory(),
             'title'=>$this->faker->text(15),
             'excerpt'=>$this->faker->sentence,

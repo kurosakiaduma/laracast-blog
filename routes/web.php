@@ -62,7 +62,7 @@ Route::get('/', function () {
 
     //Return all the posts from posts array
     return view('posts',[
-        'posts' => Post::latest('date_published')->with('category')->get()
+        'posts' => Post::latest('date_published')->with('category', 'author')->get()
     ]);
 });
 
@@ -89,5 +89,16 @@ Route::get('categories/{category:slug}', function (Category $category) {
     //Find a category by its slug and retrieve all of its posts
     return view('posts', [
         'posts' => $category->posts
+    ]);
+});
+
+
+/*
+Route to retrieve all posts under similar categories
+*/
+Route::get('authors/{author:slug}', function (Author $author) {
+    //Retrieve all posts from one singular user
+    return view('posts', [
+        'posts' => $author->posts
     ]);
 });

@@ -6,7 +6,7 @@
                 <a href="/posts/{{ $post->slug }}">
                     <h1>{{$post->title }}</h1>
                 </a>
-                <span><strong>Category: </strong><a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a></span>
+                <h4><strong>By </strong><a href="#">{{ $post->author->name}}</a> in <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a></h4>
             </div>
             <br>
             <div>
