@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     {
 
         User::truncate();
-        Category::truncate();
         Post::truncate();
 
         User::factory(5)->create();
@@ -27,8 +26,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        //Category factory to seed db with 3 fake categories
-        Category::factory(3)->create();
 
         //Post factory to seed db with 10 fake posts
         Post::factory(10)->create();

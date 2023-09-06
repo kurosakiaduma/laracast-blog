@@ -62,7 +62,7 @@ Route::get('/', function () {
 
     //Return all the posts from posts array
     return view('posts',[
-        'posts' => Post::with('category')->get()
+        'posts' => Post::latest('date_published')->with('category')->get()
     ]);
 });
 
