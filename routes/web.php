@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 /*
 |--------------------------------------------------------------------------
@@ -96,9 +97,10 @@ Route::get('categories/{category:slug}', function (Category $category) {
 /*
 Route to retrieve all posts under similar categories
 */
-Route::get('authors/{author:slug}', function (Author $author) {
+Route::get('authors/{author}', function (User $author) {
     //Retrieve all posts from one singular user
+    //dd($author);
     return view('posts', [
-        'posts' => $author->posts
+        'posts' => $author -> posts
     ]);
 });

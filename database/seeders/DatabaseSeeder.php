@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 
         User::truncate();
         Post::truncate();
+        Category::truncate();
 
-        User::factory(5)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

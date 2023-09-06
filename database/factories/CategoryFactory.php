@@ -18,8 +18,8 @@ class CategoryFactory extends Factory
     {
         return [
             //
-            $name = 'name'=>$this->faker->text(maxNbChars: 10),
-            'slug'=> $name, 
+            'name'=>$this->faker->text(maxNbChars: 10),
+            'slug'=> $this->faker->slug(),
         ];
     }
 }
