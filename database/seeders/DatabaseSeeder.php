@@ -48,7 +48,6 @@ class DatabaseSeeder extends Seeder
             'title'=>'My First Story',
             'excerpt'=>'Excerpt for the first story',
             'body'=>'<p>Lorem ipsum dolar sit amet</p>',
-            'author'=>'Tevin Aduma',
             'slug'=>'my-first-post',
         ]);
 
@@ -59,7 +58,6 @@ class DatabaseSeeder extends Seeder
             'title'=>'My Second Story',
             'excerpt'=>'Excerpt for the second story',
             'body'=>'<p>Lorem ipsum dolar sit amet</p>',
-            'author'=>'Jane Aduma',
             'slug'=>'my-second-post',
         ]);
 
@@ -70,7 +68,6 @@ class DatabaseSeeder extends Seeder
             'title'=>'My Hobby Story',
             'excerpt'=>'Excerpt for the hobby story',
             'body'=>'<p>Lorem ipsum dolar sit amet</p>',
-            'author'=>'Tevin Aduma',
             'slug'=>'my-hobby-post',
         ]);
 
@@ -81,7 +78,6 @@ class DatabaseSeeder extends Seeder
             'title'=>'My Fourth Story',
             'excerpt'=>'Excerpt for the second story',
             'body'=>'<p>Lorem ipsum dolar sit amet</p>',
-            'author'=>'Jane Aduma',
             'slug'=>'my-fourth-post',
         ]);
 
@@ -92,7 +88,6 @@ class DatabaseSeeder extends Seeder
             'title'=>'My Work Story',
             'excerpt'=>'Excerpt for the work story',
             'body'=>'<p>Lorem ipsum dolar sit amet</p>',
-            'author'=>'Worker Aduma',
             'slug'=>'my-worker-post',
         ]);
     }
