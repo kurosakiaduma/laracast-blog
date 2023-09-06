@@ -15,11 +15,18 @@ class Post extends Model
     /* Protected fields from mass assignment to avoid vulnerabilities*/
     protected $guarded = ['id'];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         #LARAVEL's relationship types
         # hasOne, hasMany, belongsTo, belongsToMany
         return $this->belongsTo(Category::class);
+
+    }
+
+    public function user():
+    {
+        #Setting up an Eloquent relationship with the user and posts
+        return $this->belongsTo(User::class);
 
     }
 
