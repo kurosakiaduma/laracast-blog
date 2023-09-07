@@ -1,14 +1,14 @@
 @props(['post'])
 
 <article
-    class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl">
+    class="transition-colors duration-300 hover:bg-gray-500 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl">
     <div class="py-6 px-5 lg:flex">
-        <div class="lg:mr-8 lg:mt-5 flex">
+        <div class="lg:mr-8 flex-1">
             <img src="/images/illustration-5.png" alt="Blog Post illustration" class="rounded-xl">
         </div>
 
-        <div class="mt-8 flex flex-col justify-between">
-            <header>
+        <div class="mt-8 flex-1 flex flex-col justify-between">
+        <header>
                 <div class="space-x-2">
                     <a href="categories/{{ $post->category->slug }}"
                        class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
@@ -27,14 +27,9 @@
 
             <div class="text-sm mt-4">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {{ $post->excerpt }}
                 </p>
 
-                <p class="mt-4">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
             </div>
 
             <footer class="flex justify-between items-center mt-8">
@@ -45,7 +40,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="hidden lg:block">
                     <a href="posts/{{ $post->slug }}"
                        class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
                     >
