@@ -15,6 +15,10 @@ class Post extends Model
     /* Protected fields from mass assignment to avoid vulnerabilities*/
     protected $guarded = ['id'];
 
+    protected $with=['category', 'author'];
+
+    protected $dates=['date_published', 'created_at', 'updated_at'];
+
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         #LARAVEL's relationship types
