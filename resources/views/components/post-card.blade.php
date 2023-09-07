@@ -7,6 +7,7 @@
 
         <div class="mt-8 flex flex-col justify-between">
 
+
             <div class="text-sm mt-4">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
