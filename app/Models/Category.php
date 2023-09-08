@@ -9,8 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function posts()
     {
-        return $this->hasMany(Post::class, "category_id");
+        return $this->hasMany(Post::class);
     }
 }
