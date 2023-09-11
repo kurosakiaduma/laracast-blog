@@ -42,7 +42,7 @@
                         <tr class="border-b">
                             <th class="text-left p-3 px-5">Name</th>
                             <th class="text-left p-3 px-5">Email</th>
-                            <th class="text-left p-3 px-5">Role</th>
+                            <th class="text-left p-3 px-5">Roles</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -58,28 +58,24 @@
                                 </td>
                                 <td class="p-3 px-5">{{ $user->email }}</td>
                                 <td class="p-3 px-5 relative group">
-                                    @if (count($user->roles) > 1)
-                                        <span class="group cursor-pointer">
-                                                {{ $user->roles[0]->name }}
-                                                <span class="absolute -top-8 hidden group-hover:block bg-gray-800 text-white text-xs p-1 rounded shadow-md">
-                                                    @foreach ($user->roles as $role)
-                                                        @if (!$loop->first)
-                                                            {{ $role->name }}
-                                                        @endif
-                                                    @endforeach
-                                                </span>
-                                            </span>
-                                        <span class="text-xs text-gray-500"> (and more)</span>
-                                    @else
-                                        {{ $user->getRoles() }}
-                                    @endif
+                                    <span class="group cursor-pointer relative" onclick="toggleRolesDropdown({{ $user->id }})">
+                                        <ul
+                                            class="absolute bg-gray-800 text-white text-sm p-2 rounded shadow-sm w-20 top-0 -mt-8"
+                                        >
+                                            @foreach ($user->roles as $role)
+                                                <li>{{ ucwords($role->name) }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </span>
                                 </td>
+
                                 <td class="p-3 px-5 flex justify-end">
                                     <a href="{{ route('admin.users.edit', $user->id) }}"
                                        class="text-white-500 hover:underline"
                                     >
-                                        <button type="button"
-                                                class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                                        <button
+                                            type="button"
+                                            class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                                         >
                                             Edit
                                         </button>
@@ -102,19 +98,39 @@
 </x-layout>
 
 <!-- Delete User Confirmation Modal -->
-<div id="deleteUserModal" class="modal">
-    <div class="modal-content">
-        <h2>Confirm Deletion</h2>
-        <p>Are you sure you want to delete this user?</p>
-        <p>User: <span id="deleteUserName"></span></p>
-        <form id="deleteUserForm" method="POST">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <button type="button" class="btn btn-secondary" onclick="closeModal('deleteUserModal')">Cancel</button>
-        </form>
+<div id="deleteUserModal" class="fixed inset-0 z-10 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none hidden">
+    <div class="relative w-auto max-w-md mx-auto my-6">
+        <!--content-->
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 class="text-3xl font-semibold">
+                    Confirm Deletion
+                </h3>
+                <button class="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="closeModal('deleteUserModal')">
+                    <span class="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                </button>
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+                <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
+                    Are you sure you want to delete this user?
+                </p>
+                <p>User: <span id="deleteUserName"></span></p>
+            </div>
+            <!--footer-->
+            <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <form id="deleteUserForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    <button type="button" class="btn btn-secondary ml-4" onclick="cancelDelete()">Cancel</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script>
     function openDeleteModal(userName, deleteUrl) {
@@ -123,7 +139,23 @@
         document.getElementById('deleteUserModal').style.display = 'block';
     }
 
+    function cancelDelete() {
+        if (confirm('Are you sure you want to cancel the delete process?')) {
+            // User confirmed to cancel, you can close the modal or perform any other action
+            closeModal('deleteUserModal');
+        }
+    }
+
     function closeModal(id) {
         document.getElementById(id).style.display = 'none';
+    }
+
+    function toggleRolesDropdown(userId) {
+        const dropdown = document.getElementById(`rolesDropdown_${userId}`);
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
     }
 </script>

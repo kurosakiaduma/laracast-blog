@@ -1,4 +1,3 @@
-<!-- resources/views/admin/users/show.blade.php -->
 <x-layout>
     <x-setting heading="User Details">
         <div class="flex flex-col">
@@ -11,7 +10,7 @@
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold">Roles</h3>
                     <ul>
-                        @foreach ($roles as $role)
+                        @foreach ($user->roles as $role)
                             <li>{{ $role->name }}</li>
                         @endforeach
                     </ul>
