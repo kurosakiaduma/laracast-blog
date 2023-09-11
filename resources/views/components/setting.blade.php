@@ -20,12 +20,12 @@
                     </a>
                 @endif
 
-                @if ($heading === 'User Management')
+                @if ($heading === 'User Management' || $heading === 'User Details')
                     <a href="/admin/users" class="{{ request()->is('admin/users') ? 'text-blue-500' : '' }}">
                         All Users
                     </a>
                     <br>
-                    <a href="/admin/users/create" :active=class="{{ request()->is('admin/users/create') ? 'text-blue-500' : '' }}">
+                    <a href="#" class="{{ request()->is('admin/users/create') ? 'text-blue-500' : '' }}">
                         New User
                     </a>
                 @endif
