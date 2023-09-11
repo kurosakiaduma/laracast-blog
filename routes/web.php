@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -33,7 +34,11 @@ Route::middleware('can:admin')->group(function () {
     Route::get('/admin/users/{user}', [AdminUserController::class, 'show'])->name('admin.users.show');
     Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}/update', [AdminUserController::class, 'update'])->name('admin.users.update');
-    Route::delete('/admin/users/{user}/delete', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.delete');
+
+
+    // Roles routes
+    Route::resource('roles', RoleController::class);
 });
 
 
