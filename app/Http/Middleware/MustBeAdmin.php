@@ -17,7 +17,8 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->username !== 'tevinaduma'){
+        // Check if the authenticated user has an admin role.
+        if (!auth()->user()->roles->contains('name', 'admin')) {
             return abort(Response::HTTP_FORBIDDEN);
         }
 
