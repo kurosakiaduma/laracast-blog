@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
-    public function show(User $user)
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $roles = $user->getRoles(); // This ports from the getRoles() method in User model
+        $users = User::all(); // Retrieve all users
+
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function show(User $user): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $roles = $user->roles; // Retrieve the roles associated with the user
 
         return view('admin.users.show', compact('user', 'roles'));
     }
