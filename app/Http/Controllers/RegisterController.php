@@ -19,6 +19,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
         ]);
+
         if ($attributes['name'] == 'tevinaduma'){
             $attributes['isAdmin'] = true;
         }

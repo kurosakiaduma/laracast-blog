@@ -29,3 +29,5 @@ Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middle
 Route::middleware('can:admin')->group(function () {
     Route::resource('admin/posts', AdminPostController::class)->except('show');
 });
+
+
