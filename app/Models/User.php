@@ -30,13 +30,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password): void
     {
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function posts()
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    //Retrieve the users' roles that share a many-to-many relationship with Role model
+    public function roles(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 }
