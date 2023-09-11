@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -46,10 +47,21 @@ class AdminUserController extends Controller
 
     public function destroy(User $user)
     {
+        // Get user details before deletion
+        $userName = $user->name;
+        $userEmail = $user->email;
+        $userRoles = $user->getRoles();
+
+        //DDD details
+        //dd($userName, $userEmail);
+
+        // Convert user details to a string
+        $userDetails = "User '$userName' ($userEmail) with roles '$userRoles' has been deleted successfully.";
+
         // Delete the user
         $user->delete();
 
-        // Redirect to the user index page or any other appropriate page
-        return redirect()->route('admin.users.index');
+        // Flash a success message with user details
+        return redirect()->route('admin.users.index')->with('success', $userDetails);
     }
 }
