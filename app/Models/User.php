@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     //Retrieve the users' roles that share a many-to-many relationship with Role model
-    public function roles(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function roles(): \Illuminate\Database\Eloquent\Relations\belongsToMany
     {
         return $this->belongsToMany(Role::class);
     }
@@ -49,7 +49,7 @@ class User extends Authenticatable
     //Obtain all the roles associated with a particular user
     public function getRoles(): string
     {
-        return $this->roles()->pluck('username')->implode('');
+        return $this->roles()->pluck('name')->implode('');
     }
 
 }
