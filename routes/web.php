@@ -31,6 +31,9 @@ Route::middleware('can:admin')->group(function () {
     Route::resource('admin/posts', AdminPostController::class)->except('show');
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/{user}', [AdminUserController::class, 'show'])->name('admin.users.show');
+    Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}/update', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}/delete', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 
