@@ -40,7 +40,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    //Retrieve the users' roles that share a many-to-many relationship with Role model
+    //Retrieve the users' roles that share a many-to-many relationship with RoleController model
     public function roles(): \Illuminate\Database\Eloquent\Relations\belongsToMany
     {
         return $this->belongsToMany(Role::class);
