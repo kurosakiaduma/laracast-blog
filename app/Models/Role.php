@@ -9,6 +9,7 @@ class Role extends Model
 {
     use HasFactory;
 
+    //Reverse M2M relationship with the User model
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class);
