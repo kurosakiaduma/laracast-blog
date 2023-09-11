@@ -11,10 +11,12 @@ class RoleFactory extends Factory
      *
      * @return array
      */
+    protected $model = Role::class;
+
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->randomElement(['admin', 'user', 'writer']),
         ];
     }
 }
