@@ -45,4 +45,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    //Obtain all the roles associated with a particular user
+    public function getRoles(): string
+    {
+        return $this->roles()->pluck('username')->implode('');
+    }
+
 }
