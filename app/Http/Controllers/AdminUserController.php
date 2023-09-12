@@ -17,7 +17,7 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    //Show a particular user's details
+    //Show a particular user's roles
     public function show(User $user): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $roles = $user->roles; // Retrieve the roles associated with the user
