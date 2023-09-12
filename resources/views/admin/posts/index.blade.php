@@ -18,6 +18,12 @@
                                             </div>
                                         </td>
 
+                                        <!--Post status-->
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <x-post-metadata :post="$post"/>
+                                        </td>
+                                        <!--End of post status-->
+
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="/admin/posts/{{ $post->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
                                         </td>

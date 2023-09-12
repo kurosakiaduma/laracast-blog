@@ -36,7 +36,7 @@
                     <x-form.label name="status"/>
 
                     <select name="status" id="status" required>
-                        <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }} class="text-red-600">Draft</option>
+                        <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }} class="text-yellow-600">Draft</option>
                         <option value="published" {{ old('status', $post->status) === 'published' ? 'selected' : '' }} class="text-green-600">Published</option>
                     </select>
 
