@@ -17,21 +17,33 @@
 
             <x-form.textarea name="excerpt" required>{{ old('excerpt', $post->excerpt) }}</x-form.textarea>
             <x-form.textarea name="body" required>{{ old('body', $post->body) }}</x-form.textarea>
+            <div class="flex columns-2 gap-20lg">
+                <x-form.field>
+                    <x-form.label name="category"/>
 
-            <x-form.field>
-                <x-form.label name="category"/>
+                    <select name="category_id" id="category_id" required>
+                        @foreach (\App\Models\Category::all() as $category)
+                            <option
+                                value="{{ $category->id }}"
+                                {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}
+                            >{{ ucwords($category->name) }}</option>
+                        @endforeach
+                    </select>
 
-                <select name="category_id" id="category_id" required>
-                    @foreach (\App\Models\Category::all() as $category)
-                        <option
-                            value="{{ $category->id }}"
-                            {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}
-                        >{{ ucwords($category->name) }}</option>
-                    @endforeach
-                </select>
+                    <x-form.error name="category"/>
+                </x-form.field>
+                <x-form.field class="ml-6">
+                    <x-form.label name="status"/>
 
-                <x-form.error name="category"/>
-            </x-form.field>
+                    <select name="status" id="status" required>
+                        <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }} class="text-red-600">Draft</option>
+                        <option value="published" {{ old('status', $post->status) === 'published' ? 'selected' : '' }} class="text-green-600">Published</option>
+                    </select>
+
+                    <x-form.error name="status"/>
+                </x-form.field>
+            </div>
+
 
             <x-form.button>Update</x-form.button>
         </form>
