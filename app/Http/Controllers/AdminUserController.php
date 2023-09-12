@@ -12,7 +12,7 @@ class AdminUserController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = User::all(); // Retrieve all users
+        $users = User::with('roles')->get(); // Retrieve all users
 
         return view('admin.users.index', compact('users'));
     }
