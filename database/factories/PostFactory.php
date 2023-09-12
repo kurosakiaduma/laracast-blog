@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -23,6 +24,8 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $statuses = ['draft', 'published'];
+
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
@@ -30,6 +33,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug(),
             'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
+            'status' => Arr::random($statuses), // Add this line to set the status randomly
         ];
     }
 }

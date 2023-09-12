@@ -11,7 +11,11 @@ class Post extends Model
 
     protected $with = ['category', 'author'];
 
-    public function scopeFilter($query, array $filters)
+    protected $fillable = [
+        'status', // Add 'status' to the fillable attributes
+    ];
+
+    public function scopeFilter($query, array $filters): void
     {
         $query->when($filters['search'] ?? false, fn($query, $search) =>
             $query->where(fn($query) =>
@@ -33,17 +37,17 @@ class Post extends Model
         );
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function author()
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
