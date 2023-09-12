@@ -9,10 +9,7 @@
 
         <div class="mt-6 flex flex-col justify-between flex-1">
             <header>
-                <div class="space-x-2">
-                   <x-category-button :category="$post->category" />
-                </div>
-
+                <x-post-metadata :post="$post"/>
                 <div class="mt-4">
                     <h1 class="text-3xl clamp one-line">
                         <a href="/posts/{{ $post->slug }}">
