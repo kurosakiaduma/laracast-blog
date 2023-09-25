@@ -1,8 +1,4 @@
 <!doctype html>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <style>
     /* Add this to control the modal display */
@@ -50,29 +46,22 @@
                         @foreach ($users as $user)
                             <tr class="border-b hover:bg-orange-100">
                                 <td class="p-3 px-5">
-                                    <a href="{{ route('admin.users.show', $user->id) }}"
-                                       class="text-blue-500 hover:underline"
-                                    >
+                                    <a href="{{ route('admin.users.show', $user->id) }}" class="text-blue-500 hover:underline">
                                         {{ $user->name }}
                                     </a>
                                 </td>
                                 <td class="p-3 px-5">{{ $user->email }}</td>
-                                <td class="p-3 px-5 relative group">
-                                    <span class="group cursor-pointer relative" onclick="toggleRolesDropdown({{ $user->id }})">
-                                        <ul
-                                            class="absolute bg-gray-800 text-white text-sm p-2 rounded shadow-sm w-20 top-0 -mt-8"
-                                        >
-                                            @foreach ($user->roles as $role)
-                                                <li>{{ ucwords($role->name) }}</li>
-                                            @endforeach
-                                        </ul>
+                                <td class="p-3 px-5">
+                                    <span class="group cursor-pointer relative">
+                                        @foreach ($user->roles as $role)
+                                            <span class="text-sm bg-gray-800 text-white px-2 rounded mb-2 mr-2">
+                                                {{ ucwords($role->name) }}
+                                            </span>
+                                        @endforeach
                                     </span>
                                 </td>
-
                                 <td class="p-3 px-5 flex justify-end">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}"
-                                       class="text-white-500 hover:underline"
-                                    >
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="text-white-500 hover:underline">
                                         <button
                                             type="button"
                                             class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -80,9 +69,10 @@
                                             Edit
                                         </button>
                                     </a>
-                                    <button type="button"
-                                            class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                                            onclick="openDeleteModal('{{ $user->name }}', '{{ route('admin.users.delete', $user->id) }}')"
+                                    <button
+                                        type="button"
+                                        class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                                        onclick="openDeleteModal('{{ $user->name }}', '{{ route('admin.users.delete', $user->id) }}')"
                                     >
                                         Delete
                                     </button>
@@ -148,14 +138,5 @@
 
     function closeModal(id) {
         document.getElementById(id).style.display = 'none';
-    }
-
-    function toggleRolesDropdown(userId) {
-        const dropdown = document.getElementById(`rolesDropdown_${userId}`);
-        if (dropdown.style.display === 'block') {
-            dropdown.style.display = 'none';
-        } else {
-            dropdown.style.display = 'block';
-        }
     }
 </script>
