@@ -12,7 +12,7 @@ class CategoryDropdown extends Component
      */
     public function render()
     {
-        return view('components.category-dropdown', [
+        return view('components.category-dropdowns', [
             'categories' => Category::all(),
             'currentCategory' => Category::firstWhere('slug', request('category'))
         ]);
