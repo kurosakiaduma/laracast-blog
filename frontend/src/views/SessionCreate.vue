@@ -42,12 +42,13 @@ export default {
         const login = async () => {
             try {
                 console.log("PROPS",form.value);
-                const response = await axios.post("http://localhost:8000/api/login?email=", form.value);
+                const response = await axios.post("http://localhost:8000/api/login", form.value);
 
                 // Handle successful login
                 console.log(response.data.message);
 
                 // Store user's information in your application state here
+                localStorage.setItem('authToken', response.data.token);
 
                 // Redirect to the root page after successful login
                 window.location.href = "/";
