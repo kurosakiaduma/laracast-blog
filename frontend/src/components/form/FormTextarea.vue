@@ -5,12 +5,10 @@
         </label>
 
         <textarea
-            class="border border-gray-200 p-2 w-full rounded"
-            :name="name"
-            :id="name"
             required
             v-bind="$attrs"
-            v-model="value"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
         ></textarea>
 
         <FormError :name="name" />
@@ -23,6 +21,7 @@ import FormError from './FormError.vue';
 
 export default {
     name: "FormTextarea",
+
     components: {
         FormError,
     },
@@ -30,6 +29,7 @@ export default {
         name: String,
         label: String,
         value: String,
+        modelValue: String,
     },
 };
 </script>
