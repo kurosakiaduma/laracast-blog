@@ -79,7 +79,7 @@ export default {
                 formData.append('excerpt', this.form.excerpt);
                 formData.append('body', this.form.body);
                 formData.append('category_id', this.form.category_id);
-                
+
                 axios.post('http://localhost:8000/api/create-post', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
