@@ -48,6 +48,8 @@ export default {
                 // Store user's information in your application state here
                 localStorage.setItem('authToken', response.data.token);
 
+                axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}`;
+
                 // Redirect to the root page after successful registration
                 window.location.href = "/";
             } catch (error) {
