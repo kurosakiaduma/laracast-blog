@@ -14,7 +14,7 @@
                         <template v-slot:trigger>
                             <!-- Use any trigger content here -->
                             <button class="text-xs font-bold uppercase">
-                                Welcome, {{ user.name }}!
+                                Welcome, {{ authenticatedUser.name }}!
                             </button>
                         </template>
 
@@ -32,9 +32,9 @@
                     </Dropdown>
                 </template>
 
+
                 <template v-else>
-                    <router-link to="/register" class="text-xs font-bold uppercase">Register</router-link>
-                    <router-link to="/login" class="ml-6 text-xs font-bold uppercase">Log In</router-link>
+                    <router-link to="/posts/create" class="ml-6 text-xs font-bold uppercase">Create New Post</router-link>
                 </template>
 
                 <a href="#newsletter" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
@@ -94,7 +94,6 @@ export default {
     data() {
         return {
             authenticated: false, // Set to true if the user is authenticated
-            user: {}, // User data when authenticated
             isAdmin: false, // Set to true if the user has admin privileges
             creatingPost: false, // Set to true if creating a new post
             email: "", // Email for newsletter subscription
@@ -124,20 +123,23 @@ export default {
             this.$refs.flash.showFlash('This is a success message.'); // Replace with your message
         },
         loadUserData() {
-            // Use Axios to fetch user data and set the authenticated status
-            axios.get('http://localhost:8000/api/user')
+            axios.get('http://localhost:8000/api/user', {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('authToken')
+                }
+            })
                 .then(response => {
                     const userData = response.data;
                     if (userData) {
-                        this.user = userData;
+                        this.authenticatedUser = userData; // Set authenticatedUser instead of user
                         this.authenticated = true; // User is authenticated
                     } else {
-                        this.user = {}; // User is not authenticated
+                        this.authenticatedUser = {}; // User is not authenticated
                         this.authenticated = false;
                     }
                 })
                 .catch(error => {
-                    console.error('Error loading user data:', error);
+                    console.error('Error fetching user:', error);
                 });
         },
     },
