@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 import RegisterView from "@/views/RegisterView.vue";
 import SessionCreate from "@/views/SessionCreate.vue";
+import PostCreate from "@/components/post/PostCreate.vue";
 import { defineAsyncComponent } from 'vue'
 
 const PostView = ()=> import('@/views/PostView.vue')
@@ -31,6 +32,11 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: SessionCreate
+        },
+        {
+            path: '/posts/create',
+            name: 'posts.create',
+            component: PostCreate,
         }
 
     ]
