@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Dropdown from '@/components/dropdown/Dropdown.vue'; // Adjust the path as needed
-import DropdownItem from '@/components/dropdown/DropdownItem.vue'; // Adjust the path as needed
+import Dropdown from '@/components/dropdowns/Dropdown.vue'; // Adjust the path as needed
+import DropdownItem from '@/components/dropdowns/DropdownItem.vue'; // Adjust the path as needed
 import Icon from '@/components/common/Icon.vue'; // Adjust the path as needed
 
 export default {
