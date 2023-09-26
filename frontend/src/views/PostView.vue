@@ -54,6 +54,7 @@
 
 <script>
 import axios from 'axios';
+import api from "@/api";
 import AddComment from "@/components/comments/AddComment.vue";
 import PostComment from "@/components/comments/PostComment.vue";
 import CategoryButton from "@/components/common/CategoryButton.vue";
