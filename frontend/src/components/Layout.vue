@@ -28,8 +28,8 @@
                         <DropdownItem href="#" @click="logout">
                             Log Out
                         </DropdownItem>
-                        <!-- Add more dropdown items as needed -->
-                        </Dropdown>
+                        <!-- Add more dropdowns items as needed -->
+                    </Dropdown>
                 </template>
 
                 <template v-else>
@@ -63,7 +63,8 @@
                                 <span v-if="errors.email" class="text-xs text-red-500">{{ errors.email }}</span>
                             </div>
                         </div>
-                        <button type="submit" class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
+                        <button type="submit"
+                                class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
                             Subscribe
                         </button>
                     </form>
@@ -76,9 +77,11 @@
 </template>
 
 <script>
-import Dropdown from '@/components/dropdown/Dropdown.vue';
-import DropdownItem from '@/components/dropdown/DropdownItem.vue';
+import Dropdown from '@/components/dropdowns/Dropdown.vue';
+import DropdownItem from '@/components/dropdowns/DropdownItem.vue';
 import Flash from '@/components/common/Flash.vue';
+import axios from 'axios'; // Import Axios
+
 export default {
     components: {
         Dropdown,
@@ -98,6 +101,10 @@ export default {
             errors: {}, // Validation errors for the email input
         };
     },
+    created() {
+        // Fetch user data and set authenticated status when the component is created
+        this.loadUserData();
+    },
     methods: {
         isActive(route) {
             // Implement logic to determine if the route is active
@@ -115,6 +122,23 @@ export default {
         showFlashMessage() {
             // Emit an event to the Flash component to show the message
             this.$refs.flash.showFlash('This is a success message.'); // Replace with your message
+        },
+        loadUserData() {
+            // Use Axios to fetch user data and set the authenticated status
+            axios.get('http://localhost:8000/api/user')
+                .then(response => {
+                    const userData = response.data;
+                    if (userData) {
+                        this.user = userData;
+                        this.authenticated = true; // User is authenticated
+                    } else {
+                        this.user = {}; // User is not authenticated
+                        this.authenticated = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user data:', error);
+                });
         },
     },
 };
