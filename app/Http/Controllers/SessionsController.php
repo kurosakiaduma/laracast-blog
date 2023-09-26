@@ -22,11 +22,10 @@ class SessionsController extends Controller
             return response()->json(['message' => 'Your provided credentials could not be verified.'], 401);
         }
 
-        session()->regenerate();
+        $token = auth()->user()->createToken('authToken')->accessToken;
 
-        return response()->json(['message' => 'Welcome Back!']);
+        return response()->json(['token' => $token, 'message' => 'Welcome Back!']);
     }
-
 
     public function destroy()
     {
