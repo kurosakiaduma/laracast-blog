@@ -64,6 +64,7 @@ export default {
 }
 
 .page-link.active {
+    cursor: not-allowed;
     background-color: #007bff;
     color: #fff;
     border: 1px solid #007bff;
