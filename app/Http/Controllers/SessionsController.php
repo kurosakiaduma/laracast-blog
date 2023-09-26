@@ -19,16 +19,14 @@ class SessionsController extends Controller
         ]);
 
         if (! auth()->attempt($attributes)) {
-            throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
-            ]);
+            return response()->json(['message' => 'Your provided credentials could not be verified.'], 401);
         }
 
-        //Done to alter the session id to prevent hackers from taking over user logins
         session()->regenerate();
 
-        return redirect('/')->with('success', 'Welcome Back!');
+        return response()->json(['message' => 'Welcome Back!']);
     }
+
 
     public function destroy()
     {
