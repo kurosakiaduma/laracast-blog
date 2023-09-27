@@ -7,6 +7,7 @@ This is a simple blog project built with Laravel and Vue.js. It allows users to 
 ### Prerequisites
 
 - PHP >= 8.0
+- Laravel >= 10.10 `ensure this requirement is met unless the environment will generate unexpected behavior with some packages`
 - Composer
 - Node.js and npm
 - Laravel CLI
@@ -30,9 +31,8 @@ This is a simple blog project built with Laravel and Vue.js. It allows users to 
     ```
     php artisan migrate:fresh --seed
     ```
-5. **Install JavaScript Dependencies**: Switch to the frontend directory and install JavaScript dependencies:
+5. **Install JavaScript Dependencies**:
     ```angular2html
-    cd frontend
     npm install
     ```
 6. **Compile Assests**:
