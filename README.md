@@ -7,6 +7,7 @@ This is a simple blog project built with Laravel and Vue.js. It allows users to 
 ### Prerequisites
 
 - PHP >= 8.0
+- Laravel >= 10.10 `ensure this requirement is met unless the environment will generate unexpected behavior with some packages`
 - Composer
 - Node.js and npm
 - Laravel CLI
