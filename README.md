@@ -30,9 +30,8 @@ This is a simple blog project built with Laravel and Vue.js. It allows users to 
     ```
     php artisan migrate:fresh --seed
     ```
-5. **Install JavaScript Dependencies**: Switch to the frontend directory and install JavaScript dependencies:
+5. **Install JavaScript Dependencies**:
     ```angular2html
-    cd frontend
     npm install
     ```
 6. **Compile Assests**:
