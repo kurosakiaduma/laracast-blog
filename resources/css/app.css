@@ -20,7 +20,7 @@
     padding: 4px 0;
 }
 
-/* Show dropdown on hover */
+/* Show dropdowns on hover */
 .relative.inline-block:hover .absolute.hidden {
     display: block;
 }

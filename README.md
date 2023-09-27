@@ -1,24 +1,55 @@
-# Blog Project
+# Laravel Vue Blog
 
-This is a Laravel-based blog project that allows users to manage posts, comments, users, and roles.
+This is a simple blog project built with Laravel and Vue.js. It allows users to manage posts, comments, and categories.
 
 ## Getting Started
 
-To get started with this project, follow these steps:
+### Prerequisites
 
-1. Clone this repository to your local machine `git clone https://github.com/kurosakiaduma/laracast-blog`
-2. Configure your environment variables by copying the `.env.example` file to `.env` and updating the values as needed.
-3. Run migrations to set up the database tables: `php artisan migrate`.
-4. Seed the database with initial data (optional): `php artisan db:seed`.
-5. Install project dependencies: `composer install` and `npm install`.
-6. Compile assets: `npm run dev`.
-7. Start the development server: `php artisan serve`.
+- PHP >= 8.0
+- Composer
+- Node.js and npm
+- Laravel CLI
+
+### Installation
+
+1. **Clone Repository**: Clone this repository to your local machine:
+
+   ```shell
+   git clone https://github.com/kurosakiaduma/laracast-blog.git
+    ```
+2. **Navigate to Backend**: Navigate to the Laravel backend directory:
+    ```
+   cd laracast-blog
+    ```
+3. **Install PHP Dependencies**: Install PHP dependencies using Composer:
+    ```angular2html
+    composer install
+    ```
+4. **Run Migrations and seed**: Run database migrations to create tables:
+    ```
+    php artisan migrate:fresh --seed
+    ```
+5. **Install JavaScript Dependencies**: Switch to the frontend directory and install JavaScript dependencies:
+    ```angular2html
+    cd frontend
+    npm install
+    ```
+6. **Compile Assests**:
+    ```angular2html
+    npm run dev
+    ```
+   `**NOTE**: The frontend will likely be served run on http://localhost:5173/. This is the app's entry point.`
+7. **Start Laravel Server**: To serve your Vue components with the backend at `http://localhost:8000`
+    ```angular2html
+    php artisan serve
+    ```
 
 ## Contributing
-
-Contributions are welcome! Please read the [Contributing Guidelines](CONTRIBUTING.md) for details on how to contribute to this project.
+Contributions to this project are welcome. To contribute, please follow the guidelines in [CONTRIBUTING.md](https://contributing.md/)
 
 ## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
+This project is open-source and available under the [MIT License](https://opensource.org/license/mit/).
+```angular2html
+Feel free to use this Markdown-formatted README for your project.
+```
