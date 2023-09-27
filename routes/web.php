@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\NewsletterController;
@@ -8,9 +9,12 @@ use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('app');
+})->name('application');
+
+//Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::post('newsletter', NewsletterController::class);
 
@@ -31,5 +35,3 @@ Route::middleware('can:admin')->group(function () {
     // Roles routes
     Route::resource('roles', RoleController::class);
 });
-
-
